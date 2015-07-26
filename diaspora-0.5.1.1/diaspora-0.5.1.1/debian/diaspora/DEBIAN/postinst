@@ -1,0 +1,71 @@
+#!/bin/bash
+echo "creating tables in database"
+sudo -u postgres psql -c "CREATE USER tester WITH PASSWORD 'tester';"
+sudo -u postgres psql -c "ALTER USER tester CREATEDB;"
+echo "done"
+echo "creating user diaspora. . . . . . . .\n\n"
+
+if cat /etc/passwd | cut -d ":" -f1|grep "diaspora"; then
+echo  "\n\nDiaspora user already exists in your system...!"
+else 
+  sudo adduser --disabled-login diaspora
+
+  echo " Getting the key and installing RVM " 
+  su - diaspora -c "gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3  "
+  su - diaspora -c "\curl -L https://get.rvm.io | bash -s stable"
+  su - diaspora -c "echo '[[ -s \"\$HOME/.rvm/scripts/rvm\" ]] && source \"\$HOME/.rvm/scripts/rvm\"'>>~/.bashrc"
+  echo "path success" 
+  su - diaspora -c "source ~/.bashrc"
+  su - diaspora -c "rvm autolibs read-fail"
+  su - diaspora -c "rvm install 2.1"
+  echo "Installed RVM !!! "
+
+
+
+  su - diaspora -c "git clone -b master git://github.com/diaspora/diaspora.git"
+  echo "copying database files !"
+  cp /home/diaspora/diaspora/config/database.yml.example /home/diaspora/diaspora/config/database.yml
+  cp /home/diaspora/diaspora/config/diaspora.yml.example /home/diaspora/diaspora/config/diaspora.yml
+
+  echo "Install Bundler"
+  su - diaspora -c "cd diaspora && pwd && gem install bundler"
+  su - diaspora -c "cd diaspora && bundle install"
+  #su - diaspora -c "RAILS_ENV=production DB=postgres  bin/bundle install --without test development"
+  su - diaspora -c "cd diaspora && RAILS_ENV=development DB=postgres  bin/bundle install"
+  echo "Installed & cofigured bundler"
+
+
+
+  echo "Edting diaspora.yml"
+  sudo perl -pi -e "s/#certificate_authorities: '\/etc\/ssl\/certs\/ca-certificates.crt'/certificate_authorities: '\/etc\/ssl\/certs\/ca-certificates.crt'/g" /home/diaspora/diaspora/config/diaspora.yml
+  sudo perl -pi -e "s/#listen: 'unix:tmp\/diaspora.sock'/#listen: 'unix:tmp\/diaspora.sock'\n    listen: ':3000'/g" /home/diaspora/diaspora/config/diaspora.yml 
+
+  echo "Edting database.yml"
+  sudo perl -pi -e "s/mysql: &mysql/#mysql: &mysql/g" /home/diaspora/diaspora/config/database.yml 
+  sudo perl -pi -e "s/adapter: mysql2/#adapter: mysql2/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/host: \"localhost\"/#host: \"localhost\"/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/port: 3306/#port: 3306/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/username: \"root\"/#username: \"root\"/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/password: \"\"/#password: \"\"/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/socket: \/tmp\/mysql.sock/#socket: \/tmp\/mysql.sock/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/encoding: utf8mb4/#encoding: utf8mb4/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/collation: utf8mb4_bin/#collation: utf8mb4_bin/g" /home/diaspora/diaspora/config/database.yml
+
+  sudo perl -pi -e "s/username: postgres/username: tester/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/password:\n/password: tester\n/g" /home/diaspora/diaspora/config/database.yml
+
+  sudo perl -pi -e "s/<<: \*mysql/#<<: \*mysql/g" /home/diaspora/diaspora/config/database.yml
+  sudo perl -pi -e "s/#<<: \*postgres/<<: \*postgres/g" /home/diaspora/diaspora/config/database.yml
+
+  echo " Edting Gemfile " 
+  sudo perl -pi -e "s/ENV\[\"DB\"\] \|\|= \"mysql\"/ENV\[\"DB\"\] \|\|= \"postgres\"/g" /home/diaspora/diaspora/Gemfile
+
+  echo "cread & load Datavase in rails environment"
+  su - diaspora -c "cd diaspora && RAILS_ENV=development DB=postgres  bin/rake db:create db:schema:load"
+  echo "Environment rails update precompile"
+  su - diaspora -c "cd diaspora && RAILS_ENV=development DB=postgres bin/rake assets:precompile"
+
+  echo "Configured diaspora running script "
+
+  su - diaspora -c "cd diaspora && DB=postgres ./script/server"
+fi

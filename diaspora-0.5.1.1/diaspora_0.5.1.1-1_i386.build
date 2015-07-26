@@ -1,0 +1,63 @@
+ dpkg-buildpackage -rfakeroot -D -us -uc
+dpkg-buildpackage: source package diaspora
+dpkg-buildpackage: source version 0.5.1.1-1
+dpkg-buildpackage: source distribution unstable
+dpkg-buildpackage: source changed by Akhil Gangavarapu <akhil.rgukt976@gmail.com>
+ dpkg-source --before-build diaspora-0.5.1.1
+dpkg-buildpackage: host architecture i386
+ fakeroot debian/rules clean
+dh clean 
+   dh_testdir
+   dh_auto_clean
+   dh_clean
+ dpkg-source -b diaspora-0.5.1.1
+dpkg-source: info: using source format `3.0 (quilt)'
+dpkg-source: info: building diaspora using existing ./diaspora_0.5.1.1.orig.tar.xz
+dpkg-source: info: building diaspora in diaspora_0.5.1.1-1.debian.tar.gz
+dpkg-source: info: building diaspora in diaspora_0.5.1.1-1.dsc
+ debian/rules build
+dh build 
+   dh_testdir
+   dh_auto_configure
+   dh_auto_build
+   dh_auto_test
+ fakeroot debian/rules binary
+dh binary 
+   dh_testroot
+   dh_prep
+   dh_auto_install
+   dh_installdocs
+   dh_installchangelogs
+   dh_perl
+   dh_link
+   dh_compress
+   dh_fixperms
+   dh_installdeb
+   dh_gencontrol
+   dh_md5sums
+   dh_builddeb
+dpkg-deb: building package `diaspora' in `../diaspora_0.5.1.1-1_all.deb'.
+ dpkg-genchanges  >../diaspora_0.5.1.1-1_i386.changes
+dpkg-genchanges: including full source code in upload
+ dpkg-source --after-build diaspora-0.5.1.1
+dpkg-buildpackage: full upload (original source is included)
+Now running lintian...
+E: diaspora changes: bad-distribution-in-changes-file unstable
+W: diaspora source: debhelper-but-no-misc-depends diaspora
+W: diaspora source: package-file-is-executable debian/changelog
+W: diaspora source: package-file-is-executable debian/control
+W: diaspora source: package-file-is-executable debian/copyright
+W: diaspora source: maintainer-script-lacks-debhelper-token debian/postinst
+W: diaspora source: missing-license-paragraph-in-dep5-copyright gnu-agpl-3.0 (paragraph at line 5)
+W: diaspora source: newer-standards-version 3.9.6 (current is 3.9.5)
+E: diaspora: copyright-should-refer-to-common-license-file-for-gpl
+W: diaspora: readme-debian-contains-debmake-template
+W: diaspora: maintainer-script-needs-depends-on-adduser postinst
+W: diaspora: maintainer-script-ignores-errors postinst
+Finished running lintian.
+Now signing changes and any dsc files...
+ signfile diaspora_0.5.1.1-1.dsc Akhil Gangavarapu <akhil.rgukt976@gmail.com>
+
+ signfile diaspora_0.5.1.1-1_i386.changes Akhil Gangavarapu <akhil.rgukt976@gmail.com>
+
+Successfully signed dsc and changes files

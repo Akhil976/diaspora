@@ -1,0 +1,53 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Thu, 02 Jul 2015 12:28:02 +0530
+Source: diaspora
+Binary: diaspora
+Architecture: source all
+Version: 0.5.1.1-1
+Distribution: unstable
+Urgency: low
+Maintainer: Akhil Gangavrapu <akhil.rgukt976@gmail.com>
+Changed-By: Akhil Gangavarapu <akhil.rgukt976@gmail.com>
+Description: 
+ diaspora   - Distributed social network diaspora pod creation
+Closes: 597093
+Changes: 
+ diaspora (0.5.1.1-1) unstable; urgency=low
+ .
+   * Initial release (Closes: #597093)
+Checksums-Sha1: 
+ 737006f36a22659aa498d4a1d606e43c062efb9c 1995 diaspora_0.5.1.1-1.dsc
+ da2443e4deba0ebffb52ea810c9e2830bccc1e26 164 diaspora_0.5.1.1.orig.tar.xz
+ e80142e9da00368523213b22c21019b895b5a494 3942 diaspora_0.5.1.1-1.debian.tar.gz
+ 9f5f55f057a221736fc4c4a5158f125005c0a438 4220 diaspora_0.5.1.1-1_all.deb
+Checksums-Sha256: 
+ 3a91b3e776bbc994c9cb8f4846f361ecf6f78b49ebeb6c37a9d400a26f1c51a1 1995 diaspora_0.5.1.1-1.dsc
+ b2af601a84e6bd960531da5af624fc21526f6b1dd3c057f180890918f3a3269e 164 diaspora_0.5.1.1.orig.tar.xz
+ 146e5bd1f8d5f2a2e1ead02f78eab83779ca68f73796e5acccb6b6451b681e0e 3942 diaspora_0.5.1.1-1.debian.tar.gz
+ 4aaf98e5131b9443e617efc47389b4f4420237c112752e708dc2b99614e82c3f 4220 diaspora_0.5.1.1-1_all.deb
+Files: 
+ 8e934d588a7d7a38301666d53e66d4eb 1995 web optional diaspora_0.5.1.1-1.dsc
+ 5b2641e407a68e03042398f2d01e59cb 164 web optional diaspora_0.5.1.1.orig.tar.xz
+ 25b141ecbfa9050ad93af1b2641d12ea 3942 web optional diaspora_0.5.1.1-1.debian.tar.gz
+ 871f821a7da45c61db40cd0de8f9b7dc 4220 web optional diaspora_0.5.1.1-1_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQIcBAEBAgAGBQJVtSPTAAoJEDpIS6Hw1k4P3IQQAJO2RIuKJtuqcS+GXr7hncWw
+H6bmhs/TIDPlNEcM8gUWEarhC39TPcqdDt4OMrG+PdCVHZXGPb3QvRWf+P6rj5B6
+XWxez487v/N6HVxhhgdO7R+FtRCczX4QgcBZOQr7e+B4zM9pxWVgbFRrZ/qLzQUU
+cPDNae4YNP4wWvtpHUpBL/lYnDPJ07Z1sEmfb5YnAhGU7NryZ6McQwhrjVwqjwDS
+hn1eGgf8v7ac/CncDE9YZoArZr4O8ghEcXTH28u84P7xK4LFpKFf25ssho788sOo
+zXb0YeVhY5h6sJMH2qGkFdHGl2uX6yI9LTdiHLoG59wDUdlN5CqFXnS6DixOCjvv
+eWsyYhHUfMkIR6VSdB3KtiPKdiYy2Yao5PMGKKYnQ6SQt0D70fZzPqParh8fpMXl
+hhqG2t0Ly8w+MyxnWljjIplnlfvAl85at5HIT8GVvlY4sfrlr4mm9oCQnnRty37J
+BfHaRUgcxKKyHFkPaAGfRNQVKGnu+795a0h/bDX+zrk0zl9OhfvwcuHjBeZKd5+a
+0lKrcvE0vazmR5KuiXgTjgZvo3U5ysrR0bRUcCepGb+GlP6tFRr17EOOI0IoEi2c
+dBosnM6TeIcVD+dxXBQDks6JlS7r25B98QtE9uArYE5RjjgwRg5p92gp1ULLyXHf
+QwXHixEdNn3bQ0bLh3pO
+=2p+4
+-----END PGP SIGNATURE-----

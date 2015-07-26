@@ -1,0 +1,36 @@
+Source: diaspora
+Section: web
+Priority: optional
+Maintainer: Akhil Gangavrapu <akhil.rgukt976@gmail.com>
+Uploaders:
+ , Akhil Gangavarapu <akhil.rgukt976@gmail.com>
+ , Relangi Sai Harika <saiharikarelangi@gmail.com>
+ , Urubandi Sandhya Rani <sandhyarani475@gmail.com>
+ , D.Tulasiya Naik <tulasiyanaik.666@gmail.com>
+ , Gudapati Manoj Kumar <mnaojpavan@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://diasporafoundation.org/
+Vcs-Git: https://github.com/diaspora/diaspora
+
+Package: diaspora
+Architecture: all
+Depends: build-essential, git, curl, imagemagick, libmagickwand-dev, nodejs, redis-server,
+ libcurl4-openssl-dev, libxml2-dev, libxslt-dev, libpq-dev, libreadline6-dev, libyaml-dev, 
+ libsqlite3-dev, sqlite3, libgdbm-dev, libncurses5-dev, bison, libffi-dev, libssl-dev,
+ postgresql, curl, gawk, autoconf, automake, mysql-client, libmysqlclient-dev
+Description: Distributed social network diaspora pod creation
+ Diaspora (currently styled diaspora* and formerly styled DIASPORA*) is a free
+ personal web server that implements a distributed social networking service.
+ Installations of the software form nodes (termed "pods") which make up the
+ distributed Diaspora social network.
+ .
+ Diaspora is intended to address privacy concerns related to centralized
+ social networks by allowing users to set up their own server (or "pod") to
+ host content; pods can then interact to share status updates, photographs,
+ and other social data. It allows its users to host their data with a
+ traditional web host, a cloud-based host, an ISP, or a friend. The framework,
+ which is being built on Ruby on Rails, is free software and can be
+ experimented with by external developers.
+ .
+ Learn more about Diaspora at http://diasporafoundation.org
